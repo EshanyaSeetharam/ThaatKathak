@@ -1,0 +1,487 @@
+/* src/App.css */
+:root {
+  --primary-black: #000000;
+  --primary-gold: #d4af37;
+  --secondary-gold: #b8860b;
+  --accent-red: #9e2b25;
+  --text-light: #ffffff;
+  --text-gold: #d4af37;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--primary-black);
+  color: var(--text-light);
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  border-bottom: 1px solid var(--primary-gold);
+  min-height: 80px; /* Fixed navbar height */
+}
+
+.navbar-brand {
+  color: var(--primary-gold) !important;
+  font-weight: 700;
+  height: 80px; /* Match navbar height */
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+.navbar-brand img {
+  height: 8vh !important; /* Larger logo */
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-light) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-gold) !important;
+}
+
+/* Hero section */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-black);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+/* Video Hero */
+.video-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-black);
+  position: relative;
+  overflow: hidden;
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-background {
+  width: 100%;
+  height: auto; /* Let height be determined by aspect ratio */
+  max-height: none;
+  object-fit: contain; /* This will show the full video without cropping */
+  z-index: 0;
+}
+
+/* If the video is too tall for the viewport, scale it down */
+@media (max-height: 50vw) {
+  .video-background {
+    height: 100vh;
+    width: auto;
+  }
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Reduced opacity to see video better */
+  z-index: 1;
+}
+
+/* Ensure hero content is above video */
+.hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+.gold-text {
+  color: var(--primary-gold);
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: var(--text-light); 
+  letter-spacing: 3px;
+  margin-bottom: 2rem;
+}
+
+.tagline span {
+  color: var(--primary-gold);
+}
+
+/* Section styling */
+.section-title {
+  color: var(--primary-gold);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background-color: var(--primary-gold);
+}
+
+.section {
+  padding: 5rem 0;
+  color: var(--text-light);
+}
+
+/* Ensure all text in dark sections is visible */
+.section p {
+  color: var(--text-light) !important;
+}
+
+.section h3 {
+  color: var(--text-light) !important;
+}
+
+.section h4 {
+  color: var(--text-light) !important;
+}
+
+.section h5 {
+  color: var(--text-light) !important;
+}
+
+/* Specific styling for classes section */
+#classes {
+  color: var(--text-light) !important;
+}
+
+#classes p {
+  color: var(--text-light) !important;
+}
+
+#classes .mb-4 p {
+  color: var(--text-light) !important;
+}
+
+/* Specific styling for performances section */
+#performances {
+  color: var(--text-light) !important;
+}
+
+#performances p {
+  color: var(--text-light) !important;
+}
+
+#performances .show-details h5 {
+  color: var(--text-light) !important;
+}
+
+#performances .show-details p {
+  color: var(--text-light) !important;
+}
+
+/* Button styling */
+.btn-gold {
+  background-color: var(--primary-gold);
+  border: none;
+  color: var(--primary-black);
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background-color: var(--secondary-gold);
+  color: white;
+}
+
+.btn-outline-gold {
+  background-color: transparent;
+  border: 2px solid var(--primary-gold);
+  color: var(--primary-gold);
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+  background-color: var(--primary-gold);
+  color: var(--primary-black);
+}
+
+/* Footer styling */
+footer {
+  background-color: rgba(0, 0, 0, 0.95);
+  border-top: 1px solid var(--primary-gold);
+  padding: 3rem 0;
+  margin-top: auto;
+}
+
+.social-icon {
+  color: var(--text-light);
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--primary-gold);
+}
+
+/* Image Carousel Styling */
+.image-carousel {
+  padding: 2rem 0;
+}
+
+.carousel-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border: 3px solid var(--primary-gold);
+  border-radius: 10px;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--primary-gold);
+  border: 2px solid var(--primary-gold);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-size: 1.2rem;
+}
+
+.carousel-arrow:hover {
+  background-color: var(--primary-gold);
+  color: var(--primary-black);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow-left {
+  left: 20px;
+}
+
+.carousel-arrow-right {
+  right: 20px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-gold);
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background-color: var(--primary-gold);
+}
+
+.carousel-dot:hover {
+  background-color: var(--primary-gold);
+  transform: scale(1.2);
+}
+
+.carousel-counter {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--primary-gold);
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-image-wrapper {
+    height: 300px;
+  }
+  
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .carousel-arrow-left {
+    left: 10px;
+  }
+  
+  .carousel-arrow-right {
+    right: 10px;
+  }
+  
+  .carousel-counter {
+    bottom: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* About page */
+.about-image {
+  border: 3px solid var(--primary-gold);
+}
+
+/* Custom card styling */
+.custom-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--primary-gold);
+  border-radius: 0;
+  transition: transform 0.3s ease;
+  color: var(--text-light) !important;
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+}
+
+.custom-card-header {
+  background-color: var(--primary-gold);
+  color: var(--primary-black) !important;
+  font-weight: 600;
+}
+
+.custom-card .card-body {
+  color: var(--text-light) !important;
+}
+
+.custom-card .card-title {
+  color: var(--primary-gold) !important;
+}
+
+.custom-card .card-subtitle {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.custom-card .card-text {
+  color: var(--text-light) !important;
+}
+
+.custom-card p {
+  color: var(--text-light) !important;
+}
+
+.custom-card strong {
+  color: var(--primary-gold) !important;
+}
+
+/* Performance calendar */
+.calendar-date {
+  background-color: var(--primary-gold);
+  color: var(--primary-black);
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.show-details {
+  padding: 1rem;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+  }
+  
+  .section {
+    padding: 3rem 0;
+  }
+}
