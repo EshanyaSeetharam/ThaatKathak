@@ -118,19 +118,10 @@ body {
 
 .video-background {
   width: 100%;
-  height: auto; /* Let height be determined by aspect ratio */
-  max-height: none;
-  object-fit: contain; /* This will show the full video without cropping */
+  height: 100%;
+  object-fit: cover;
   z-index: 0;
   filter: blur(2px);
-}
-
-/* If the video is too tall for the viewport, scale it down */
-@media (max-height: 50vw) {
-  .video-background {
-    height: 100vh;
-    width: auto;
-  }
 }
 
 .video-overlay {
@@ -475,14 +466,21 @@ footer {
 /* For mobile responsiveness */
 @media (max-width: 768px) {
   .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
-  
+
   .tagline {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
   }
-  
+
   .section {
     padding: 3rem 0;
+  }
+
+  .hero-content .btn-gold,
+  .hero-content .btn-outline-gold {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
   }
 }
