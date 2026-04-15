@@ -6,7 +6,7 @@ function Footer() {
     const section = document.getElementById(sectionId);
     if (section) {
       window.scrollTo({
-        top: section.offsetTop - 80,
+        top: section.offsetTop - 80, // Adjust for navbar height
         behavior: 'smooth'
       });
     }
@@ -23,10 +23,7 @@ function Footer() {
               <a href="https://instagram.com/thaat_kathak_academy" target="_blank" rel="noopener noreferrer" className="social-icon me-3">
                 <i className="bi bi-instagram"></i>
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon me-3">
-                <i className="bi bi-facebook"></i>
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon me-3">
+              <a href="https://www.youtube.com/@smithasrinivasan" target="_blank" rel="noopener noreferrer" className="social-icon me-3">
                 <i className="bi bi-youtube"></i>
               </a>
             </div>
@@ -35,22 +32,34 @@ function Footer() {
             <h5 className="gold-text mb-4">QUICK LINKS</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <a href="#hero" onClick={(e) => { e.preventDefault(); scrollToSection('hero'); }} className="text-white text-decoration-none">Home</a>
+                <a href="#hero" onClick={(e) => { e.preventDefault(); scrollToSection('hero'); }} className="text-white text-decoration-none">
+                  Home
+                </a>
               </li>
               <li className="mb-2">
-                <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="text-white text-decoration-none">About</a>
+                <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="text-white text-decoration-none">
+                  About
+                </a>
               </li>
               <li className="mb-2">
-                <a href="#classes" onClick={(e) => { e.preventDefault(); scrollToSection('classes'); }} className="text-white text-decoration-none">Classes</a>
+                <a href="#classes" onClick={(e) => { e.preventDefault(); scrollToSection('classes'); }} className="text-white text-decoration-none">
+                  Classes
+                </a>
               </li>
               <li className="mb-2">
-                <a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToSection('gallery'); }} className="text-white text-decoration-none">Gallery</a>
+                <a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToSection('gallery'); }} className="text-white text-decoration-none">
+                  Gallery
+                </a>
               </li>
               <li className="mb-2">
-                <a href="#performances" onClick={(e) => { e.preventDefault(); scrollToSection('performances'); }} className="text-white text-decoration-none">Performances</a>
+                <a href="#performances" onClick={(e) => { e.preventDefault(); scrollToSection('performances'); }} className="text-white text-decoration-none">
+                  Performances
+                </a>
               </li>
               <li className="mb-2">
-                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }} className="text-white text-decoration-none">Contact</a>
+                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }} className="text-white text-decoration-none">
+                  Contact
+                </a>
               </li>
             </ul>
           </Col>
