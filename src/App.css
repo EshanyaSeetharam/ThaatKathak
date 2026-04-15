@@ -465,32 +465,167 @@ footer {
 
 /* For mobile responsiveness */
 @media (max-width: 768px) {
+  /* Hero - show full video, no black bars */
   .video-hero {
     min-height: auto;
-    aspect-ratio: 2 / 1;
+    padding-top: 80px;
+  }
+
+  .video-container {
+    position: relative;
+  }
+
+  .video-background {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .video-overlay {
+    position: absolute;
+  }
+
+  .hero-content {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
   }
 
   .hero-content h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-content .display-3 {
+    font-size: 1.3rem !important;
   }
 
   .tagline {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 1.5px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
 
-  .section {
-    padding: 3rem 0;
+  .hero-content .mt-4 {
+    margin-top: 0.8rem !important;
   }
 
   .hero-content .btn-gold,
   .hero-content .btn-outline-gold {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.7rem;
   }
 
   .hero-content .btn-gold {
     margin-right: 0.5rem !important;
+  }
+
+  /* Navbar */
+  .navbar {
+    min-height: 60px;
+  }
+
+  .navbar-brand {
+    height: 60px;
+  }
+
+  .navbar-brand img {
+    height: 5vh !important;
+  }
+
+  /* Sections - tighter padding */
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* About section */
+  .about-image {
+    margin-bottom: 1.5rem;
+  }
+
+  #about p {
+    font-size: 0.9rem;
+  }
+
+  /* Team cards */
+  .custom-card .rounded-circle {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .custom-card .card-title {
+    font-size: 1rem;
+  }
+
+  .custom-card .card-text {
+    font-size: 0.85rem;
+  }
+
+  /* Classes cards - compact */
+  #classes .card-title {
+    font-size: 0.95rem;
+  }
+
+  #classes .card-text {
+    font-size: 0.85rem;
+  }
+
+  #classes .btn-outline-gold {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  #classes .btn-gold {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Gallery */
+  .gallery-item img {
+    height: 150px !important;
+  }
+
+  /* Performances */
+  .calendar-date {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .show-details {
+    padding: 0.75rem;
+  }
+
+  .show-details h5 {
+    font-size: 1rem;
+  }
+
+  .show-details p {
+    font-size: 0.85rem;
+  }
+
+  /* Contact form */
+  #contact .custom-card {
+    padding: 1.5rem !important;
+  }
+
+  #contact h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem 0;
+    font-size: 0.85rem;
+  }
+
+  footer h5 {
+    font-size: 1rem;
   }
 }
