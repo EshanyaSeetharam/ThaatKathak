@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "content"
+    label: "Site Content"
+    files:
+      - name: "shows"
+        label: "Upcoming Shows"
+        file: "public/data/shows.json"
+        fields:
+          - label: "Shows"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "string", hint: "Format: Month Day Year (e.g. July 13 2025)" }
+              - { label: "Venue", name: "venue", widget: "string" }
+              - { label: "Time", name: "time", widget: "string" }
+              - { label: "Poster", name: "poster", widget: "image" }
+
+      - name: "gallery"
+        label: "Gallery"
+        file: "public/data/gallery.json"
+        fields:
+          - label: "Images"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Image", name: "src", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
