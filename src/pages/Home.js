@@ -137,7 +137,7 @@ function Home() {
     return () => {
       handlers.forEach(({ row, handler }) => row.removeEventListener('scroll', handler));
     };
-  }, []);
+  }, [upcomingShows, galleryImages, pastPerformances]);
 
   const founderData = {
     id: 1,
