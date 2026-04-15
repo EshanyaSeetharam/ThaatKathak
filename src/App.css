@@ -229,33 +229,45 @@ body {
 
 /* Button styling */
 .btn-gold {
-  background-color: var(--primary-gold);
-  border: none;
-  color: var(--primary-black);
+  background-color: var(--primary-gold) !important;
+  border: 2px solid var(--primary-gold) !important;
+  color: var(--primary-black) !important;
   font-weight: 600;
-  padding: 0.75rem 2rem;
+  padding: 0.6rem 1.8rem;
   border-radius: 0;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 
-.btn-gold:hover {
-  background-color: var(--secondary-gold);
-  color: white;
+.btn-gold:hover,
+.btn-gold:focus,
+.btn-gold:active {
+  background-color: var(--secondary-gold) !important;
+  border-color: var(--secondary-gold) !important;
+  color: white !important;
+  box-shadow: none !important;
 }
 
 .btn-outline-gold {
-  background-color: transparent;
-  border: 2px solid var(--primary-gold);
-  color: var(--primary-gold);
+  background-color: transparent !important;
+  border: 2px solid var(--primary-gold) !important;
+  color: var(--primary-gold) !important;
   font-weight: 600;
-  padding: 0.75rem 2rem;
+  padding: 0.6rem 1.8rem;
   border-radius: 0;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 
-.btn-outline-gold:hover {
-  background-color: var(--primary-gold);
-  color: var(--primary-black);
+.btn-outline-gold:hover,
+.btn-outline-gold:focus,
+.btn-outline-gold:active {
+  background-color: var(--primary-gold) !important;
+  color: var(--primary-black) !important;
+  border-color: var(--primary-gold) !important;
+  box-shadow: none !important;
 }
 
 /* Footer styling */
@@ -714,6 +726,10 @@ footer {
   footer {
     padding: 2rem 0;
     font-size: 0.85rem;
+  }
+
+  footer h5 {
+    font-size: 1rem;
   }
 
   footer h5 {
