@@ -2,52 +2,28 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
 import VideoHero from '../components/VideoHero';
-import founderImage from '../assets/images/founder.jpg'; // Image of Smitha Srinivasan
-import performanceImage1 from '../assets/images/performance1.jpeg';
-import performanceImage2 from '../assets/images/performance2.jpg';  
-import performanceImage3 from '../assets/images/performance3.jpg';
-import performanceImage4 from '../assets/images/performance4.jpg'; 
-import performanceImage5 from '../assets/images/performance5.jpeg'; 
+import founderImage from '../assets/images/founder.jpg';
+import performanceImage5 from '../assets/images/performance5.jpeg';
 import performanceImage6 from '../assets/images/performance6.jpeg';
 import performanceImage7 from '../assets/images/performance7.jpeg';
-import show1 from '../assets/images/Show1.jpeg';
 
 function Home() {
-  // Upcoming shows data
-  const upcomingShows = [
-    {
-      id: 1,
-      title: "Akhanda Arpan",
-      date: "July 13 2025",
-      venue: "Alliance Française De Bangalore",
-      time: "12:45 PM to 8 PM",
-      poster: show1
-    },
-    {
-      id: 2,
-      title: "Kathak Utsav",
-      date: "August 8 2025",
-      venue: "Ravindra Kalakshetra, Bengaluru",
-      time: "5:00 PM",
-      poster: show1
-    },
-    {
-      id: 3,
-      title: "Nritya Sangam",
-      date: "September 20 2025",
-      venue: "Chowdiah Memorial Hall, Bengaluru",
-      time: "6:30 PM",
-      poster: show1
-    }
-  ];
-  
-  // Gallery images - only use actual images, no placeholders
-  const galleryImages = [
-    { id: 1, src: performanceImage1, alt: "Performance 1" },
-    { id: 2, src: performanceImage2, alt: "Performance 2" },
-    { id: 3, src: performanceImage3, alt: "Workshop" },
-    { id: 4, src: performanceImage4, alt: "Class" }
-  ];
+  // Dynamic data from CMS
+  const [upcomingShows, setUpcomingShows] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  // Fetch shows and gallery from CMS JSON files
+  useEffect(() => {
+    fetch('/data/shows.json')
+      .then(r => r.json())
+      .then(data => setUpcomingShows((data.items || []).map((s, i) => ({ ...s, id: i + 1 }))))
+      .catch(() => setUpcomingShows([]));
+
+    fetch('/data/gallery.json')
+      .then(r => r.json())
+      .then(data => setGalleryImages((data.items || []).map((g, i) => ({ ...g, id: i + 1 }))))
+      .catch(() => setGalleryImages([]));
+  }, []);
 
   // Classes data
   const classesData = [
