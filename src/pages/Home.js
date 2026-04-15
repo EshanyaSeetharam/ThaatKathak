@@ -1,6 +1,7 @@
 // src/pages/Home.js
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import VideoHero from '../components/VideoHero';
 import founderImage from '../assets/images/founder.jpg';
 import performanceImage5 from '../assets/images/performance5.jpeg';
@@ -8,6 +9,7 @@ import performanceImage6 from '../assets/images/performance6.jpeg';
 import performanceImage7 from '../assets/images/performance7.jpeg';
 
 function Home() {
+  const navigate = useNavigate();
   // Dynamic data from CMS
   const [upcomingShows, setUpcomingShows] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
@@ -16,7 +18,12 @@ function Home() {
   useEffect(() => {
     fetch('/data/shows.json')
       .then(r => r.json())
-      .then(data => setUpcomingShows((data.items || []).map((s, i) => ({ ...s, id: i + 1 }))))
+      .then(data => {
+        const sorted = (data.items || [])
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .map((s, i) => ({ ...s, id: i + 1 }));
+        setUpcomingShows(sorted);
+      })
       .catch(() => setUpcomingShows([]));
 
     fetch('/data/gallery.json')
@@ -239,11 +246,6 @@ function Home() {
                     <div className="mt-3">
                       <p className="mb-3"><strong>Schedule:</strong> {classItem.schedule}</p>
                     </div>
-                    <div className="mt-auto text-center">
-                      <Button className="btn-outline-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
-                        ENQUIRE NOW
-                      </Button>
-                    </div>
                   </Card.Body>
                 </Card>
               </Col>
@@ -265,7 +267,7 @@ function Home() {
           <h2 className="section-title text-center mb-5">Gallery</h2>
           <div className="mobile-scroll-wrapper">
           <Row className="mobile-scroll-row">
-            {galleryImages.map(image => (
+            {galleryImages.slice(0, 4).map(image => (
               <Col md={6} lg={3} key={image.id} className="mb-4 mobile-scroll-item">
                 <div className="gallery-item">
                   <img
@@ -279,9 +281,11 @@ function Home() {
             ))}
           </Row>
           </div>
-          <div className="text-center mt-4">
-            <Button className="btn-gold">VIEW MORE IMAGES</Button>
-          </div>
+          {galleryImages.length > 4 && (
+            <div className="text-center mt-4">
+              <Button className="btn-gold" onClick={() => navigate('/gallery')}>VIEW MORE IMAGES</Button>
+            </div>
+          )}
         </Container>
       </section>
 
