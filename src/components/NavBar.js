@@ -1,21 +1,29 @@
 // src/components/NavBar.js
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from '../assets/images/thaat-logo.png'; // You'll need to add your logo
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const closeNav = () => setExpanded(false);
 
   const scrollToSection = (sectionId) => {
     closeNav();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80, // Adjust for navbar height
-        behavior: 'smooth'
-      });
+    if (location.pathname !== '/') {
+      // Navigate home first, then scroll after page loads
+      navigate('/', { state: { scrollTo: sectionId } });
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -46,7 +54,7 @@ function NavBar() {
             <Nav.Link href="#hero" onClick={() => scrollToSection('hero')}>Home</Nav.Link>
             <Nav.Link href="#about" onClick={() => scrollToSection('about')}>About</Nav.Link>
             <Nav.Link href="#classes" onClick={() => scrollToSection('classes')}>Classes</Nav.Link>
-            <Nav.Link href="#gallery" onClick={() => scrollToSection('gallery')}>Gallery</Nav.Link>
+            <Nav.Link href="/gallery" onClick={(e) => { e.preventDefault(); closeNav(); navigate('/gallery'); }}>Gallery</Nav.Link>
             <Nav.Link href="#performances" onClick={() => scrollToSection('performances')}>Performances</Nav.Link>
             <Nav.Link href="#contact" onClick={() => scrollToSection('contact')}>Contact</Nav.Link>
           </Nav>
