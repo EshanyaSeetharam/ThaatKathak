@@ -407,6 +407,10 @@ footer {
   border: 3px solid var(--primary-gold);
 }
 
+.about-founder-img {
+  width: 100%;
+}
+
 /* Custom card styling */
 .custom-card {
   background-color: rgba(0, 0, 0, 0.7);
@@ -545,13 +549,78 @@ footer {
     margin-bottom: 1.5rem;
   }
 
-  /* About section */
-  .about-image {
+  /* About section - smaller image on mobile */
+  .about-founder-img {
+    width: 70%;
     margin-bottom: 1.5rem;
   }
 
   #about p {
     font-size: 0.9rem;
+  }
+
+  /* Horizontal scroll for cards on mobile */
+  .mobile-scroll-wrapper {
+    position: relative;
+  }
+
+  .mobile-scroll-wrapper::before,
+  .mobile-scroll-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .mobile-scroll-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), transparent);
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-scroll-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.9), transparent);
+    transition: opacity 0.3s ease;
+  }
+
+  /* Hide left fade at start, right fade at end */
+  .mobile-scroll-wrapper.at-start::before {
+    opacity: 0;
+  }
+
+  .mobile-scroll-wrapper.at-end::after {
+    opacity: 0;
+  }
+
+  .mobile-scroll-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0;
+    margin: 0;
+  }
+
+  /* Hide scrollbar */
+  .mobile-scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-scroll-row {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .mobile-scroll-item {
+    flex: 0 0 85%;
+    max-width: 85%;
+    scroll-snap-align: center;
+    padding: 0 0.5rem;
   }
 
   /* Team cards */
@@ -569,6 +638,11 @@ footer {
   }
 
   /* Classes cards - compact */
+  #classes .mobile-scroll-item {
+    flex: 0 0 85%;
+    max-width: 85%;
+  }
+
   #classes .card-title {
     font-size: 0.95rem;
   }
@@ -587,9 +661,26 @@ footer {
     font-size: 0.85rem;
   }
 
-  /* Gallery */
+  /* Gallery - wider items */
+  #gallery .mobile-scroll-item {
+    flex: 0 0 85%;
+    max-width: 85%;
+  }
+
+  /* Performances - one show at a time */
+  #performances .mobile-scroll-item {
+    flex: 0 0 90%;
+    max-width: 90%;
+  }
+
+  /* Ensemble gallery cards */
+  .ensemble-card {
+    padding: 0 0.5rem;
+  }
+
   .gallery-item img {
-    height: 150px !important;
+    height: 200px !important;
+    border-radius: 4px;
   }
 
   /* Performances */
