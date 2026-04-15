@@ -1,5 +1,5 @@
 // src/pages/Home.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
 import VideoHero from '../components/VideoHero';
 import founderImage from '../assets/images/founder.jpg'; // Image of Smitha Srinivasan
@@ -20,15 +20,25 @@ function Home() {
       title: "Akhanda Arpan",
       date: "July 13 2025",
       venue: "Alliance Française De Bangalore",
-      time: "12:45 PM to 8 PM"
+      time: "12:45 PM to 8 PM",
+      poster: show1
+    },
+    {
+      id: 2,
+      title: "Kathak Utsav",
+      date: "August 8 2025",
+      venue: "Ravindra Kalakshetra, Bengaluru",
+      time: "5:00 PM",
+      poster: show1
+    },
+    {
+      id: 3,
+      title: "Nritya Sangam",
+      date: "September 20 2025",
+      venue: "Chowdiah Memorial Hall, Bengaluru",
+      time: "6:30 PM",
+      poster: show1
     }
-    // {
-    //   id: 2,
-    //   title: "Kathak Utsav",
-    //   date: "July 8 2025",
-    //   venue: "Ravindra Kalakshetra, Bengaluru",
-    //   time: "5:00 PM"
-    // }
   ];
   
   // Gallery images - only use actual images, no placeholders
@@ -99,6 +109,31 @@ function Home() {
       .catch(() => setFormStatus('error'));
   };
 
+  // Scroll fade detection for mobile scroll wrappers
+  useEffect(() => {
+    const updateScrollFades = (scrollRow) => {
+      const wrapper = scrollRow.parentElement;
+      if (!wrapper || !wrapper.classList.contains('mobile-scroll-wrapper')) return;
+      const atStart = scrollRow.scrollLeft <= 5;
+      const atEnd = scrollRow.scrollLeft + scrollRow.clientWidth >= scrollRow.scrollWidth - 5;
+      wrapper.classList.toggle('at-start', atStart);
+      wrapper.classList.toggle('at-end', atEnd);
+    };
+
+    const scrollRows = document.querySelectorAll('.mobile-scroll-row');
+    const handlers = [];
+    scrollRows.forEach(row => {
+      updateScrollFades(row); // initial state
+      const handler = () => updateScrollFades(row);
+      row.addEventListener('scroll', handler);
+      handlers.push({ row, handler });
+    });
+
+    return () => {
+      handlers.forEach(({ row, handler }) => row.removeEventListener('scroll', handler));
+    };
+  }, []);
+
   const founderData = {
     id: 1,
     name: "Smitha Srinivasan",
@@ -119,11 +154,11 @@ function Home() {
         <Container>
           <h2 className="section-title text-center mb-5">About Us</h2>
           <Row className="align-items-center">
-            <Col lg={6} className="mb-4 mb-lg-0">
-              <img 
-                src={founderImage} 
-                alt="Smitha Srinivasan - Founder" 
-                className="w-100 about-image"
+            <Col lg={6} className="mb-4 mb-lg-0 text-center">
+              <img
+                src={founderImage}
+                alt="Smitha Srinivasan - Founder"
+                className="about-image about-founder-img"
               />
             </Col>
             <Col lg={6}>
@@ -137,9 +172,10 @@ function Home() {
 
           {/* Our Team */}
           <h3 className="text-center gold-text mt-5 mb-4">Our Team</h3>
-          <Row>
+          <div className="mobile-scroll-wrapper">
+          <Row className="mobile-scroll-row">
             {/* Founder */}
-            <Col lg={4} md={4} className="mb-4">
+            <Col lg={4} md={4} className="mb-4 mobile-scroll-item">
               <Card className="custom-card h-100 text-center">
                 {founderData.image && (
                   <div className="p-3">
@@ -160,7 +196,7 @@ function Home() {
             </Col>
 
             {/* Banaswadi Team */}
-            <Col lg={4} md={6} className="mb-4">
+            <Col lg={4} md={6} className="mb-4 mobile-scroll-item">
               <Card className="custom-card h-100 text-center">
                 <div className="p-3">
                   <img 
@@ -183,7 +219,7 @@ function Home() {
             </Col>
 
             {/* Electronic City Team */}
-            <Col lg={4} md={6} className="mb-4">
+            <Col lg={4} md={6} className="mb-4 mobile-scroll-item">
               <Card className="custom-card h-100 text-center">
                 <div className="p-3">
                   <img 
@@ -205,6 +241,7 @@ function Home() {
               </Card>
             </Col>
           </Row>
+          </div>
         </Container>
       </section>
 
@@ -212,9 +249,10 @@ function Home() {
       <section id="classes" className="section" style={{backgroundColor: 'rgba(20, 20, 20, 0.9)'}}>
         <Container>
           <h2 className="section-title text-center mb-5">Our Classes</h2>
-          <Row>
+          <div className="mobile-scroll-wrapper">
+          <Row className="mobile-scroll-row">
             {classesData.map(classItem => (
-              <Col md={3} className="mb-4" key={classItem.id}>
+              <Col md={3} className="mb-4 mobile-scroll-item" key={classItem.id}>
                 <Card className="custom-card h-100">
                   <Card.Header className="custom-card-header text-center">{classItem.level}</Card.Header>
                   <Card.Body className="d-flex flex-column">
@@ -235,6 +273,7 @@ function Home() {
               </Col>
             ))}
           </Row>
+          </div>
           <div className="text-center mt-4">
             <p className="mb-4">Our classes run throughout the year with new batches starting every quarter. Contact us for the next enrollment dates.</p>
             <Button className="btn-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
@@ -248,11 +287,12 @@ function Home() {
       <section id="gallery" className="section">
         <Container>
           <h2 className="section-title text-center mb-5">Gallery</h2>
-          <Row>
+          <div className="mobile-scroll-wrapper">
+          <Row className="mobile-scroll-row">
             {galleryImages.map(image => (
-              <Col md={6} lg={3} key={image.id} className="mb-4">
+              <Col md={6} lg={3} key={image.id} className="mb-4 mobile-scroll-item">
                 <div className="gallery-item">
-                  <img 
+                  <img
                     src={image.src}
                     alt={image.alt}
                     className="w-100"
@@ -262,6 +302,7 @@ function Home() {
               </Col>
             ))}
           </Row>
+          </div>
           <div className="text-center mt-4">
             <Button className="btn-gold">VIEW MORE IMAGES</Button>
           </div>
@@ -272,41 +313,41 @@ function Home() {
       <section id="performances" className="section" style={{backgroundColor: 'rgba(20, 20, 20, 0.9)'}}>
         <Container>
           <h2 className="section-title text-center mb-5">Performances</h2>
-          <Row>
+
+          {/* Upcoming Shows - poster + details together */}
+          <h3 className="gold-text mb-4">Upcoming Shows</h3>
+          <div className="mobile-scroll-wrapper">
+          <Row className="mobile-scroll-row">
+            {upcomingShows.map(show => (
+              <Col lg={4} md={6} key={show.id} className="mb-4 mobile-scroll-item">
+                <Card className="custom-card h-100">
+                  <img src={show.poster} alt={show.title} className="w-100" style={{ objectFit: 'cover' }} />
+                  <Card.Body>
+                    <div className="d-flex align-items-start mb-2">
+                      <div className="calendar-date text-center me-3" style={{ minWidth: '60px' }}>
+                        <div className="fs-5 fw-bold">{show.date.split(' ')[1]}</div>
+                        <div className="small">{show.date.split(' ')[0]}</div>
+                      </div>
+                      <div>
+                        <h5 className="mb-1">{show.title}</h5>
+                        <p className="mb-1 small">{show.venue}</p>
+                        <p className="mb-0 small">{show.time}</p>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          </div>
+
+          {/* Thaat Ensemble - separate */}
+          <hr className="my-5" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }} />
+          <Row className="align-items-center">
             <Col lg={6} className="mb-4 mb-lg-0">
-              <h3 className="gold-text mb-4">Upcoming Shows</h3>
-              {upcomingShows.map(show => (
-                <div key={show.id} className="mb-4 custom-card">
-                  <Row className="g-0">
-                    <Col xs={3} md={2}>
-                      <div className="calendar-date">
-                        <div className="fs-4">{show.date.split(' ')[1]}</div>
-                        <div>{show.date.split(' ')[0]}</div>
-                      </div>
-                    </Col>
-                    <Col xs={9} md={10}>
-                      <div className="show-details">
-                        <h5>{show.title}</h5>
-                        <p className="mb-1">{show.venue}</p>
-                        <p className="mb-0">{show.time}</p>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              ))}
-              {/* <Button className="btn-outline-gold mt-2">VIEW MORE EVENTS</Button> */}
-            </Col>
-            <Col lg={6}>
               <h3 className="gold-text mb-4">Thaat Ensemble</h3>
-              <div className="position-relative mb-3">
-                <img 
-                  src={show1} 
-                  alt="Thaat Kathak Academy Performance" 
-                  className="w-50 about-image"
-                />
-              </div>
               <p>The Thaat Ensemble is our professional performing wing that showcases the vibrancy of Kathak through performances across India. With choreography that bridges classical tradition and contemporary relevance, the ensemble has been praised for its elegance, precision, and emotive power.</p>
-              <Button className="btn-outline-gold">BOOK A PERFORMANCE</Button>
+              <Button className="btn-outline-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>BOOK A PERFORMANCE</Button>
             </Col>
           </Row>
         </Container>
