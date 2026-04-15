@@ -596,28 +596,55 @@ footer {
 
 /* For mobile responsiveness */
 @media (max-width: 768px) {
-  /* Hero mobile */
+  /* Hero mobile - landscape video, no cropping */
   .video-hero {
-    min-height: 100vh;
+    min-height: auto;
     padding-top: 80px;
   }
 
+  .video-container {
+    position: relative;
+  }
+
+  .video-background {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: blur(2px);
+  }
+
+  .video-overlay {
+    position: absolute;
+  }
+
+  .hero-content {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+  }
+
   .hero-content h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 0.3rem;
   }
 
   .hero-content .display-3 {
-    font-size: 1.5rem !important;
+    font-size: 1.8rem !important;
   }
 
   .hero-tagline {
     font-size: 0.85rem;
   }
 
+  .hero-location {
+    font-size: 0.85rem;
+  }
+
   .tagline {
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
     margin-bottom: 0.8rem;
   }
 
@@ -627,8 +654,8 @@ footer {
 
   .hero-content .btn-gold,
   .hero-content .btn-outline-gold {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
   }
 
   .hero-content .btn-gold {
