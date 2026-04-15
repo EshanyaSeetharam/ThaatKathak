@@ -1,7 +1,7 @@
 // src/components/VideoHero.js
 import React, { useRef, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
-import introVideo from '../assets/videos/intro-video.mp4'; // Import your intro video
+import introVideo from '../assets/intro-video.mp4'; // Import your intro video
 
 function VideoHero() {
   const videoRef = useRef(null);
