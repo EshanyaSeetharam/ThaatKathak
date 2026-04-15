@@ -1,7 +1,8 @@
 // src/components/VideoHero.js
 import React, { useRef, useEffect, useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
-import introVideo from '../assets/intro-video.mp4';
+
+const VIDEO_SRC = process.env.PUBLIC_URL + '/intro-video.mp4';
 
 function VideoHero() {
   const popupVideoRef = useRef(null);
@@ -14,6 +15,7 @@ function VideoHero() {
     if (!showPopup || !popupVideoRef.current) return;
 
     popupVideoRef.current.play().catch(() => {
+      // Auto-play prevented, close popup
       setShowPopup(false);
     });
 
@@ -27,7 +29,7 @@ function VideoHero() {
     return () => video.removeEventListener('ended', handleEnd);
   }, [showPopup]);
 
-  // Start background video looping (always plays behind hero)
+  // Start background video looping
   useEffect(() => {
     if (bgVideoRef.current) {
       bgVideoRef.current.play().catch(() => {});
@@ -51,10 +53,11 @@ function VideoHero() {
 
   return (
     <>
-      {/* Video Popup Modal - clear, no blur */}
+      {/* Video Popup Modal */}
       {showPopup && (
         <div className={`video-modal-overlay ${popupFading ? 'fading' : ''}`} onClick={closePopup}>
           <div className="video-modal" onClick={(e) => e.stopPropagation()}>
+            <p className="video-modal-intro">Presenting the art of Kathak — a glimpse into Thaat</p>
             <button className="video-modal-close" onClick={closePopup}>&times;</button>
             <video
               ref={popupVideoRef}
@@ -63,7 +66,7 @@ function VideoHero() {
               playsInline
               preload="auto"
             >
-              <source src={introVideo} type="video/mp4" />
+              <source src={VIDEO_SRC} type="video/mp4" />
             </video>
           </div>
         </div>
@@ -80,7 +83,7 @@ function VideoHero() {
             playsInline
             preload="metadata"
           >
-            <source src={introVideo} type="video/mp4" />
+            <source src={VIDEO_SRC} type="video/mp4" />
           </video>
         </div>
         <div className="video-overlay"></div>
