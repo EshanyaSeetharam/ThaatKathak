@@ -2,7 +2,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap';
 import VideoHero from '../components/VideoHero';
-import ImageCarousel from '../components/ImageCarousel';
 import founderImage from '../assets/images/founder.jpg'; // Image of Smitha Srinivasan
 import performanceImage1 from '../assets/images/performance1.jpeg';
 import performanceImage2 from '../assets/images/performance2.jpg';  
@@ -12,7 +11,6 @@ import performanceImage5 from '../assets/images/performance5.jpeg';
 import performanceImage6 from '../assets/images/performance6.jpeg';
 import performanceImage7 from '../assets/images/performance7.jpeg';
 import show1 from '../assets/images/Show1.jpeg';
-import classImage from '../assets/images/class1.jpeg';
 
 function Home() {
   // Upcoming shows data
@@ -81,66 +79,6 @@ function Home() {
     bio: "Trained under Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999.",
     image: founderImage
   };
-
-  const banaswadiTeam = [
-    {
-      id: 2,
-      name: "Eshanya Bhat",
-      role: "Senior Student",
-      bio: "Dedicated student with excellent technique and stage presence."
-    },
-    {
-      id: 3,
-      name: "Shreya Mechri",
-      role: "Senior Student", 
-      bio: "Passionate dancer specializing in traditional compositions."
-    },
-    {
-      id: 4,
-      name: "Gouri Mechri",
-      role: "Senior Student",
-      bio: "Talented performer with strong foundation in Kathak fundamentals."
-    }
-  ];
-
-  const electronicCityTeam = [
-    {
-      id: 5,
-      name: "Jaya Srinivasan",
-      role: "Senior Student",
-      bio: "Accomplished dancer with focus on abhinaya and expression."
-    },
-    {
-      id: 6,
-      name: "Sayanthan Sengupta",
-      role: "Senior Student",
-      bio: "Dedicated practitioner with excellent rhythmic skills."
-    },
-    {
-      id: 7,
-      name: "Shohini Ghosh",
-      role: "Senior Student",
-      bio: "Expressive performer with strong technical foundation."
-    },
-    {
-      id: 8,
-      name: "Sumantra Chaudhury",
-      role: "Senior Student",
-      bio: "Versatile dancer with passion for classical storytelling."
-    },
-    {
-      id: 9,
-      name: "Puvaneshwari",
-      role: "Senior Student",
-      bio: "Graceful performer with natural stage presence."
-    },
-    {
-      id: 10,
-      name: "Garima Gola",
-      role: "Senior Student",
-      bio: "Talented dancer with dedication to the art of Kathak."
-    }
-  ];
 
   return (
     <>
