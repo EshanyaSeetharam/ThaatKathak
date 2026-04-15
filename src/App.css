@@ -122,6 +122,7 @@ body {
   max-height: none;
   object-fit: contain; /* This will show the full video without cropping */
   z-index: 0;
+  filter: blur(2px);
 }
 
 /* If the video is too tall for the viewport, scale it down */
@@ -138,7 +139,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Reduced opacity to see video better */
+  background: rgba(0, 0, 0, 0.6); /* Darker overlay to mask compression */
   z-index: 1;
 }
 
