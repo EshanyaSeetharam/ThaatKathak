@@ -1,460 +1,67 @@
-// src/pages/Home.js
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
+// src/components/NavBar.js
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import VideoHero from '../components/VideoHero';
-import founderImage from '../assets/images/founder.jpg';
-import performanceImage5 from '../assets/images/performance5.jpeg';
-import performanceImage6 from '../assets/images/performance6.jpeg';
-import performanceImage7 from '../assets/images/performance7.jpeg';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import logo from '../assets/images/thaat-logo.png'; // You'll need to add your logo
 
-function Home() {
+function NavBar() {
+  const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Handle scroll-to from navbar navigation (coming from another page)
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      setTimeout(() => {
-        const section = document.getElementById(location.state.scrollTo);
-        if (section) {
-          window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
-        }
-      }, 100);
-      // Clear the state so it doesn't re-scroll on re-renders
-      window.history.replaceState({}, document.title);
+  const closeNav = () => setExpanded(false);
+
+  const scrollToSection = (sectionId) => {
+    closeNav();
+    if (location.pathname !== '/') {
+      // Navigate home first, then scroll after page loads
+      navigate('/', { state: { scrollTo: sectionId } });
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
     }
-  }, [location.state]);
-
-  // Dynamic data from CMS
-  const [upcomingShows, setUpcomingShows] = useState([]);
-  const [galleryImages, setGalleryImages] = useState([]);
-
-  // Fetch shows and gallery from CMS JSON files
-  useEffect(() => {
-    fetch('/data/shows.json')
-      .then(r => r.json())
-      .then(data => {
-        const sorted = (data.items || [])
-          .sort((a, b) => new Date(a.date) - new Date(b.date))
-          .map((s, i) => ({ ...s, id: i + 1 }));
-        setUpcomingShows(sorted);
-      })
-      .catch(() => setUpcomingShows([]));
-
-    fetch('/data/gallery.json')
-      .then(r => r.json())
-      .then(data => setGalleryImages((data.items || []).map((g, i) => ({ ...g, id: i + 1 }))))
-      .catch(() => setGalleryImages([]));
-  }, []);
-
-  // Classes data
-  const classesData = [
-    {
-      id: 1,
-      level: "Saturday Batch",
-      title: "Kalpavrisha, Horamavu",
-      description: "Conducted by Smt. Smitha Srinivasan herself. Experience traditional Kathak training with our founder and artistic director.",
-      schedule: "Saturday: 10 AM - 12 PM"
-    },
-    {
-      id: 2,
-      level: "Sunday Batch",
-      title: "Kalpavriksha, Horamavu Location",
-      description: "Conducted by senior student Eshanya Bhat.",
-      schedule: "Sunday: 11 AM - 1 PM"
-    },
-    {
-      id: 3,
-      level: "Saturday Batch",
-      title: "Utsarga Academy, Electronic City",
-      description: "Conducted by senior student Jaya Srinivasan.",
-      schedule: "Saturday: 10 AM - 12 PM"
-    },
-    {
-      id: 4,
-      level: "Sunday Batch",
-      title: "Triple S Components Pvt Ltd, Electronic City",
-      description: "Conducted by Smt. Smitha Srinivasan herself. Junior and senior batches available with our founder.",
-      schedule: "Sunday: 9 AM - 12 PM"
-    }
-  ];
-
-  // Team data with three sections
-  const [formStatus, setFormStatus] = useState(null); // 'success', 'error', or null
-  const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', subject: '', message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const encode = (data) => Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...formData })
-    })
-      .then(() => {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      })
-      .catch(() => setFormStatus('error'));
-  };
-
-  // Scroll fade detection for mobile scroll wrappers
-  useEffect(() => {
-    const updateScrollFades = (scrollRow) => {
-      const wrapper = scrollRow.parentElement;
-      if (!wrapper || !wrapper.classList.contains('mobile-scroll-wrapper')) return;
-      const atStart = scrollRow.scrollLeft <= 5;
-      const atEnd = scrollRow.scrollLeft + scrollRow.clientWidth >= scrollRow.scrollWidth - 5;
-      wrapper.classList.toggle('at-start', atStart);
-      wrapper.classList.toggle('at-end', atEnd);
-    };
-
-    const scrollRows = document.querySelectorAll('.mobile-scroll-row');
-    const handlers = [];
-    scrollRows.forEach(row => {
-      updateScrollFades(row); // initial state
-      const handler = () => updateScrollFades(row);
-      row.addEventListener('scroll', handler);
-      handlers.push({ row, handler });
-    });
-
-    return () => {
-      handlers.forEach(({ row, handler }) => row.removeEventListener('scroll', handler));
-    };
-  }, []);
-
-  const founderData = {
-    id: 1,
-    name: "Smt. Smitha Srinivasan",
-    role: "Founder & Artistic Director",
-    bio: "Trained under Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999.",
-    image: founderImage
   };
 
   return (
-    <>
-      {/* Hero Section */}
-      <section id="hero">
-        <VideoHero />
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="section">
-        <Container>
-          <h2 className="section-title text-center mb-5">About Us</h2>
-          <Row className="align-items-center">
-            <Col lg={6} className="mb-4 mb-lg-0 text-center">
-              <img
-                src={founderImage}
-                alt="Smt. Smitha Srinivasan - Founder"
-                className="about-image about-founder-img"
-              />
-            </Col>
-            <Col lg={6}>
-              <h3 className="mb-3">Our Legacy</h3>
-              <p>Founded in 2018 by Smt. Smitha Srinivasan, Thaat Kathak Academy is dedicated to preserving and promoting the classical dance form of Kathak.</p>
-              <p>She has been a devoted student of Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999, forming the foundation of the academy's teaching approach—discipline, devotion, and dynamic storytelling.</p>
-              <p>At Thaat, students are introduced to the rich heritage of Kathak while developing their own artistic voice. The academy offers classes for all levels, focusing on technique, abhinaya (expression), and performance skills.</p>
-              <p>The Thaat Ensemble, the academy's performing wing, showcases Kathak through acclaimed performances across India, praised for elegance, precision, and emotive power.</p>
-            </Col>
-          </Row>
-
-          {/* Our Team */}
-          <h3 className="text-center gold-text mt-5 mb-4">Our Team</h3>
-          <div className="mobile-scroll-wrapper">
-          <Row className="mobile-scroll-row">
-            {/* Founder */}
-            <Col lg={4} md={4} className="mb-4 mobile-scroll-item">
-              <Card className="custom-card h-100 text-center">
-                {founderData.image && (
-                  <div className="p-3">
-                    <img 
-                      src={performanceImage7} 
-                      alt={founderData.name} 
-                      className="rounded-circle mb-3"
-                      style={{ width: '180px', height: '180px', objectFit: 'cover', border: '2px solid rgba(212, 175, 55, 0.5)' }}
-                    />
-                  </div>
-                )}
-                <Card.Body>
-                  <Card.Title className="gold-text">{founderData.name}</Card.Title>
-                  <Card.Subtitle className="mb-3">{founderData.role}</Card.Subtitle>
-                  <Card.Text>{founderData.bio}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            {/* Banaswadi Team */}
-            <Col lg={4} md={6} className="mb-4 mobile-scroll-item">
-              <Card className="custom-card h-100 text-center">
-                <div className="p-3">
-                  <img 
-                    src={performanceImage5} 
-                    alt="Banaswadi Team" 
-                    className="rounded-circle mb-3"
-                    style={{ width: '180px', height: '180px', objectFit: 'cover', border: '2px solid rgba(212, 175, 55, 0.5)' }}
-                  />
-                </div>
-                <Card.Body>
-                  <Card.Title className="gold-text">Banaswadi Team</Card.Title>
-                  <Card.Subtitle className="mb-3">Senior Students</Card.Subtitle>
-                  <Card.Text>
-                    <strong>Eshanya Bhat</strong>, <strong>Shreya Mechri</strong>, <strong>Gouri Mechri</strong>
-                    <br /><br />
-                    Dedicated students from our Banaswadi branch, excelling in technique, expression, and performance.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            {/* Electronic City Team */}
-            <Col lg={4} md={6} className="mb-4 mobile-scroll-item">
-              <Card className="custom-card h-100 text-center">
-                <div className="p-3">
-                  <img 
-                    src={performanceImage6} 
-                    alt="Electronic City Team" 
-                    className="rounded-circle mb-3"
-                    style={{ width: '180px', height: '180px', objectFit: 'cover', border: '2px solid rgba(212, 175, 55, 0.5)' }}
-                  />
-                </div>
-                <Card.Body>
-                  <Card.Title className="gold-text">Electronic City Team</Card.Title>
-                  <Card.Subtitle className="mb-3">Senior Students</Card.Subtitle>
-                  <Card.Text>
-                    <strong>Jaya Srinivasan</strong>, <strong>Sayantan Sengupta</strong>, <strong>Shohini Ghosh</strong>, <strong>Sumantra Chaudhury</strong>, <strong>Puvaneshwari</strong>, <strong>Garima Gola</strong>
-                    <br /><br />
-                    Accomplished dancers from our Electronic City branch, showcasing excellence in classical Kathak.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          </div>
-        </Container>
-      </section>
-
-      {/* Classes Section */}
-      <section id="classes" className="section" style={{backgroundColor: 'rgba(20, 20, 20, 0.9)'}}>
-        <Container>
-          <h2 className="section-title text-center mb-5">Our Classes</h2>
-          <div className="mobile-scroll-wrapper">
-          <Row className="mobile-scroll-row">
-            {classesData.map(classItem => (
-              <Col md={3} className="mb-4 mobile-scroll-item" key={classItem.id}>
-                <Card className="custom-card h-100">
-                  <Card.Header className="custom-card-header text-center">{classItem.level}</Card.Header>
-                  <Card.Body className="d-flex flex-column">
-                    <Card.Title>{classItem.title}</Card.Title>
-                    <Card.Text className="mb-2">
-                      {classItem.description}
-                    </Card.Text>
-                    <div className="mt-3">
-                      <p className="mb-3"><strong>Schedule:</strong> {classItem.schedule}</p>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-          </div>
-          <div className="text-center mt-4">
-            <p className="mb-4">Our classes run throughout the year with new batches starting every quarter. Contact us for the next enrollment dates.</p>
-            <Button className="btn-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
-              JOIN OUR CLASSES
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* Gallery Section */}
-      <section id="gallery" className="section">
-        <Container>
-          <h2 className="section-title text-center mb-5">Gallery</h2>
-          <div className="mobile-scroll-wrapper">
-          <Row className="mobile-scroll-row">
-            {galleryImages.slice(0, 4).map(image => (
-              <Col md={6} lg={3} key={image.id} className="mb-4 mobile-scroll-item">
-                <div className="gallery-item">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-100"
-                    style={{ height: '200px', objectFit: 'cover' }}
-                  />
-                </div>
-              </Col>
-            ))}
-          </Row>
-          </div>
-          {galleryImages.length > 4 && (
-            <div className="text-center mt-4">
-              <Button className="btn-gold" onClick={() => navigate('/gallery')}>VIEW MORE IMAGES</Button>
-            </div>
-          )}
-        </Container>
-      </section>
-
-      {/* Performances Section */}
-      <section id="performances" className="section" style={{backgroundColor: 'rgba(20, 20, 20, 0.9)'}}>
-        <Container>
-          <h2 className="section-title text-center mb-5">Performances</h2>
-
-          {/* Upcoming Shows - poster + details together */}
-          <h3 className="gold-text mb-4">Upcoming Shows</h3>
-          <div className="mobile-scroll-wrapper">
-          <Row className="mobile-scroll-row">
-            {upcomingShows.map(show => (
-              <Col lg={4} md={6} key={show.id} className="mb-4 mobile-scroll-item">
-                <Card className="custom-card h-100">
-                  <img src={show.poster} alt={show.title} className="w-100" style={{ objectFit: 'cover' }} />
-                  <Card.Body>
-                    <div className="d-flex align-items-start mb-2">
-                      <div className="calendar-date text-center me-3" style={{ minWidth: '60px' }}>
-                        <div className="fs-5 fw-bold">{show.date.split(' ')[1]}</div>
-                        <div className="small">{show.date.split(' ')[0]}</div>
-                      </div>
-                      <div>
-                        <h5 className="mb-1">{show.title}</h5>
-                        <p className="mb-1 small">{show.venue}</p>
-                        <p className="mb-0 small">{show.time}</p>
-                      </div>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-          </div>
-
-          {/* Thaat Ensemble - separate */}
-          <hr className="my-5" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }} />
-          <Row className="align-items-center">
-            <Col lg={6} className="mb-4 mb-lg-0">
-              <h3 className="gold-text mb-4">Thaat Ensemble</h3>
-              <p>The Thaat Ensemble is our professional performing wing that showcases the vibrancy of Kathak through performances across India. With choreography that bridges classical tradition and contemporary relevance, the ensemble has been praised for its elegance, precision, and emotive power.</p>
-              <Button className="btn-outline-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>BOOK A PERFORMANCE</Button>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="section">
-        <Container>
-          <h2 className="section-title text-center mb-5">Contact Us</h2>
-          <Row>
-            <Col lg={5} className="mb-4 mb-lg-0">
-              <h3 className="gold-text mb-4">Get In Touch</h3>
-              <p className="mb-4">Interested in learning Kathak or booking a performance? Reach out to us today!</p>
-              
-              <div className="mb-4">
-                <p className="mb-2">
-                  <i className="bi bi-geo-alt gold-text me-2"></i> 
-                  Bengaluru, Karnataka
-                </p>
-                <p className="mb-2">
-                  <i className="bi bi-telephone gold-text me-2"></i> 
-                  +91 98451 32558
-                </p>
-                <p className="mb-2">
-                  <i className="bi bi-envelope gold-text me-2"></i> 
-                  info@thaatkathak.com
-                </p>
-                <p className="mb-2">
-                  <i className="bi bi-instagram gold-text me-2"></i> 
-                  @thaat_kathak_academy
-                </p>
-              </div>
-
-              <h4 className="gold-text mb-3">Connect With Us</h4>
-              <div className="d-flex">
-                <a href="https://instagram.com/thaat_kathak_academy" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
-                  <i className="bi bi-instagram"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
-                  <i className="bi bi-facebook"></i>
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
-                  <i className="bi bi-youtube"></i>
-                </a>
-              </div>
-            </Col>
-            <Col lg={7}>
-              <div className="custom-card p-4">
-                <h3 className="gold-text mb-4">Send Us a Message</h3>
-                {formStatus === 'success' && (
-                  <Alert variant="success" onClose={() => setFormStatus(null)} dismissible>
-                    Thank you! Your message has been sent successfully.
-                  </Alert>
-                )}
-                {formStatus === 'error' && (
-                  <Alert variant="danger" onClose={() => setFormStatus(null)} dismissible>
-                    Something went wrong. Please try again.
-                  </Alert>
-                )}
-                <Form name="contact" method="POST" onSubmit={handleSubmit}>
-                  <input type="hidden" name="form-name" value="contact" />
-                  <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
-                  <Row>
-                    <Col md={6} className="mb-3">
-                      <Form.Group>
-                        <Form.Label>Full Name*</Form.Label>
-                        <Form.Control type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} required />
-                      </Form.Group>
-                    </Col>
-                    <Col md={6} className="mb-3">
-                      <Form.Group>
-                        <Form.Label>Email*</Form.Label>
-                        <Form.Control type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} required />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6} className="mb-3">
-                      <Form.Group>
-                        <Form.Label>Phone</Form.Label>
-                        <Form.Control type="tel" name="phone" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
-                      </Form.Group>
-                    </Col>
-                    <Col md={6} className="mb-3">
-                      <Form.Group>
-                        <Form.Label>Subject*</Form.Label>
-                        <Form.Select name="subject" value={formData.subject} onChange={handleChange} required>
-                          <option value="">Select a subject</option>
-                          <option value="class">Class Enquiry</option>
-                          <option value="performance">Performance Booking</option>
-                          <option value="workshop">Workshop</option>
-                          <option value="other">Other</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Message*</Form.Label>
-                    <Form.Control as="textarea" name="message" rows={5} placeholder="Type your message here..." value={formData.message} onChange={handleChange} required />
-                  </Form.Group>
-                  <div className="text-center">
-                    <Button type="submit" className="btn-gold">SEND MESSAGE</Button>
-                  </div>
-                </Form>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </>
+    <Navbar 
+      variant="dark"
+      expand="lg" 
+      fixed="top" 
+      className="py-3"
+      expanded={expanded}
+    >
+      <Container>
+        <Navbar.Brand href="#" onClick={() => scrollToSection('hero')} className="d-flex align-items-center">
+          <img
+            src={logo}
+            height="60"
+            className="d-inline-block align-top me-2"
+            alt="Thaat Kathak Academy Logo"
+          />
+          
+        </Navbar.Brand>
+        <Navbar.Toggle 
+          aria-controls="basic-navbar-nav" 
+          onClick={() => setExpanded(expanded ? false : true)}
+        />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link href="#hero" onClick={() => scrollToSection('hero')}>Home</Nav.Link>
+            <Nav.Link href="#about" onClick={() => scrollToSection('about')}>About</Nav.Link>
+            <Nav.Link href="#classes" onClick={() => scrollToSection('classes')}>Classes</Nav.Link>
+            <Nav.Link href="/gallery" onClick={(e) => { e.preventDefault(); closeNav(); navigate('/gallery'); }}>Gallery</Nav.Link>
+            <Nav.Link href="#performances" onClick={() => scrollToSection('performances')}>Performances</Nav.Link>
+            <Nav.Link href="#contact" onClick={() => scrollToSection('contact')}>Contact</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
-export default Home;
+export default NavBar;
