@@ -23,7 +23,7 @@ body {
 /* Navbar styling */
 .navbar {
   background-color: rgba(0, 0, 0, 0.9) !important;
-  border-bottom: 1px solid var(--primary-gold);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
   min-height: 80px; /* Fixed navbar height */
 }
 
@@ -144,9 +144,16 @@ body {
   color: var(--primary-gold);
 }
 
+.hero-location {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+
 .tagline {
   font-size: 1.5rem;
-  color: var(--text-light); 
+  color: var(--text-light);
   letter-spacing: 3px;
   margin-bottom: 2rem;
 }
@@ -176,8 +183,12 @@ body {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 4rem 0;
   color: var(--text-light);
+}
+
+#about {
+  padding-top: 2.5rem;
 }
 
 /* Ensure all text in dark sections is visible */
@@ -273,7 +284,7 @@ body {
 /* Footer styling */
 footer {
   background-color: rgba(0, 0, 0, 0.95);
-  border-top: 1px solid var(--primary-gold);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
   padding: 3rem 0;
   margin-top: auto;
 }
@@ -416,7 +427,7 @@ footer {
 
 /* About page */
 .about-image {
-  border: 3px solid var(--primary-gold);
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .about-founder-img {
@@ -426,15 +437,16 @@ footer {
 /* Custom card styling */
 .custom-card {
   background-color: rgba(0, 0, 0, 0.7);
-  border: 1px solid var(--primary-gold);
+  border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: 0;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   color: var(--text-light) !important;
 }
 
 .custom-card:hover {
-  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.6);
 }
+
 
 .custom-card-header {
   background-color: var(--primary-gold);
@@ -530,8 +542,8 @@ footer {
 
   .hero-content .btn-gold,
   .hero-content .btn-outline-gold {
-    padding: 0.35rem 0.8rem;
-    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
   }
 
   .hero-content .btn-gold {
