@@ -394,16 +394,6 @@ function Home() {
           <Row>
             <Col lg={5} className="mb-4 mb-lg-0">
               <p className="mb-4">Interested in learning Kathak or requesting a performance? Reach out to us today!</p>
-
-              <h4 className="gold-text mb-3">Connect With Us</h4>
-              <div className="d-flex">
-                <a href="https://instagram.com/thaat_kathak_academy" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
-                  <i className="bi bi-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/@smithasrinivasan" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
-                  <i className="bi bi-youtube"></i>
-                </a>
-              </div>
             </Col>
             <Col lg={7}>
               <div className="custom-card p-4">
