@@ -169,6 +169,16 @@ body {
   max-width: 900px;
 }
 
+.video-modal-intro {
+  text-align: center;
+  color: var(--primary-gold);
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
 .video-modal-player {
   width: 100%;
   border-radius: 8px;
