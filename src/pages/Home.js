@@ -393,37 +393,14 @@ function Home() {
           <h2 className="section-title text-center mb-5">Contact Us</h2>
           <Row>
             <Col lg={5} className="mb-4 mb-lg-0">
-              <h3 className="gold-text mb-4">Get In Touch</h3>
               <p className="mb-4">Interested in learning Kathak or requesting a performance? Reach out to us today!</p>
-              
-              <div className="mb-4">
-                <p className="mb-2">
-                  <i className="bi bi-geo-alt gold-text me-2"></i> 
-                  Bengaluru, Karnataka
-                </p>
-                <p className="mb-2">
-                  <i className="bi bi-telephone gold-text me-2"></i> 
-                  +91 98451 32558
-                </p>
-                <p className="mb-2">
-                  <i className="bi bi-envelope gold-text me-2"></i> 
-                  info@thaatkathak.com
-                </p>
-                <p className="mb-2">
-                  <i className="bi bi-instagram gold-text me-2"></i> 
-                  @thaat_kathak_academy
-                </p>
-              </div>
 
               <h4 className="gold-text mb-3">Connect With Us</h4>
               <div className="d-flex">
                 <a href="https://instagram.com/thaat_kathak_academy" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
                   <i className="bi bi-instagram"></i>
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
-                  <i className="bi bi-facebook"></i>
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
+                <a href="https://www.youtube.com/@smithasrinivasan" target="_blank" rel="noopener noreferrer" className="social-icon me-3 fs-3">
                   <i className="bi bi-youtube"></i>
                 </a>
               </div>
