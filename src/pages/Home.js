@@ -1,6 +1,6 @@
 // src/pages/Home.js
-import React from 'react';
-import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
 import VideoHero from '../components/VideoHero';
 import founderImage from '../assets/images/founder.jpg'; // Image of Smitha Srinivasan
 import performanceImage1 from '../assets/images/performance1.jpeg';
@@ -72,6 +72,33 @@ function Home() {
   ];
 
   // Team data with three sections
+  const [formStatus, setFormStatus] = useState(null); // 'success', 'error', or null
+  const [formData, setFormData] = useState({
+    name: '', email: '', phone: '', subject: '', message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const encode = (data) => Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...formData })
+    })
+      .then(() => {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      })
+      .catch(() => setFormStatus('error'));
+  };
+
   const founderData = {
     id: 1,
     name: "Smitha Srinivasan",
@@ -329,18 +356,30 @@ function Home() {
             <Col lg={7}>
               <div className="custom-card p-4">
                 <h3 className="gold-text mb-4">Send Us a Message</h3>
-                <Form>
+                {formStatus === 'success' && (
+                  <Alert variant="success" onClose={() => setFormStatus(null)} dismissible>
+                    Thank you! Your message has been sent successfully.
+                  </Alert>
+                )}
+                {formStatus === 'error' && (
+                  <Alert variant="danger" onClose={() => setFormStatus(null)} dismissible>
+                    Something went wrong. Please try again.
+                  </Alert>
+                )}
+                <Form name="contact" method="POST" onSubmit={handleSubmit}>
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
                   <Row>
                     <Col md={6} className="mb-3">
                       <Form.Group>
                         <Form.Label>Full Name*</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your name" required />
+                        <Form.Control type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} required />
                       </Form.Group>
                     </Col>
                     <Col md={6} className="mb-3">
                       <Form.Group>
                         <Form.Label>Email*</Form.Label>
-                        <Form.Control type="email" placeholder="Enter your email" required />
+                        <Form.Control type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} required />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -348,13 +387,13 @@ function Home() {
                     <Col md={6} className="mb-3">
                       <Form.Group>
                         <Form.Label>Phone</Form.Label>
-                        <Form.Control type="tel" placeholder="Enter your phone number" />
+                        <Form.Control type="tel" name="phone" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
                       </Form.Group>
                     </Col>
                     <Col md={6} className="mb-3">
                       <Form.Group>
                         <Form.Label>Subject*</Form.Label>
-                        <Form.Select required>
+                        <Form.Select name="subject" value={formData.subject} onChange={handleChange} required>
                           <option value="">Select a subject</option>
                           <option value="class">Class Enquiry</option>
                           <option value="performance">Performance Booking</option>
@@ -366,7 +405,7 @@ function Home() {
                   </Row>
                   <Form.Group className="mb-3">
                     <Form.Label>Message*</Form.Label>
-                    <Form.Control as="textarea" rows={5} placeholder="Type your message here..." required />
+                    <Form.Control as="textarea" name="message" rows={5} placeholder="Type your message here..." value={formData.message} onChange={handleChange} required />
                   </Form.Group>
                   <div className="text-center">
                     <Button type="submit" className="btn-gold">SEND MESSAGE</Button>
