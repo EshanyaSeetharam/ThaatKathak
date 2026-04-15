@@ -140,7 +140,7 @@ function Home() {
             <Col lg={6}>
               <h3 className="mb-3">Our Legacy</h3>
               <p>Founded in 2018 by Smt. Smitha Srinivasan, Thaat Kathak Academy is dedicated to preserving and promoting the classical dance form of Kathak.</p>
-              <p>Smt. Srinivasan has been a devoted student of Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999, forming the foundation of the academy's teaching approach—discipline, devotion, and dynamic storytelling.</p>
+              <p>She has been a devoted student of Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999, forming the foundation of the academy's teaching approach—discipline, devotion, and dynamic storytelling.</p>
               <p>At Thaat, students are introduced to the rich heritage of Kathak while developing their own artistic voice. The academy offers classes for all levels, focusing on technique, abhinaya (expression), and performance skills.</p>
               <p>The Thaat Ensemble, the academy's performing wing, showcases Kathak through acclaimed performances across India, praised for elegance, precision, and emotive power.</p>
             </Col>
