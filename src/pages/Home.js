@@ -29,8 +29,9 @@ function Home() {
   // Dynamic data from CMS
   const [upcomingShows, setUpcomingShows] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [pastPerformances, setPastPerformances] = useState([]);
 
-  // Fetch shows and gallery from CMS JSON files
+  // Fetch shows, gallery, and past performances from CMS JSON files
   useEffect(() => {
     fetch('/data/shows.json')
       .then(r => r.json())
@@ -46,6 +47,11 @@ function Home() {
       .then(r => r.json())
       .then(data => setGalleryImages((data.items || []).map((g, i) => ({ ...g, id: i + 1 }))))
       .catch(() => setGalleryImages([]));
+
+    fetch('/data/past-performances.json')
+      .then(r => r.json())
+      .then(data => setPastPerformances((data.items || []).map((p, i) => ({ ...p, id: i + 1 }))))
+      .catch(() => setPastPerformances([]));
   }, []);
 
   // Classes data
@@ -352,23 +358,32 @@ function Home() {
           </Row>
 
           {/* Past Performances */}
-          <hr className="my-5" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }} />
-          <h3 className="gold-text mb-4">Past Performances</h3>
-          <div className="mobile-scroll-wrapper">
-          <Row className="mobile-scroll-row">
-            <Col lg={4} md={6} className="mb-4 mobile-scroll-item">
-              <Card className="custom-card h-100">
-                <Card.Body>
-                  <Card.Title className="gold-text">Thaatanjali 2025</Card.Title>
-                  <Card.Text>Annual showcase featuring solo and group Kathak performances by students and the Thaat Ensemble.</Card.Text>
-                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="btn btn-outline-gold btn-sm">
-                    <i className="bi bi-youtube me-2"></i>Watch on YouTube
-                  </a>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          </div>
+          {pastPerformances.length > 0 && (
+            <>
+              <hr className="my-5" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }} />
+              <h3 className="gold-text mb-4">Past Performances</h3>
+              <div className="mobile-scroll-wrapper">
+              <Row className="mobile-scroll-row">
+                {pastPerformances.map(perf => (
+                  <Col lg={4} md={6} key={perf.id} className="mb-4 mobile-scroll-item">
+                    <Card className="custom-card h-100">
+                      {perf.poster && <img src={perf.poster} alt={perf.title} className="w-100" style={{ objectFit: 'cover', maxHeight: '200px' }} />}
+                      <Card.Body>
+                        <Card.Title className="gold-text">{perf.title}</Card.Title>
+                        <Card.Text>{perf.description}</Card.Text>
+                        {perf.youtube && (
+                          <a href={perf.youtube} target="_blank" rel="noopener noreferrer" className="btn btn-outline-gold btn-sm">
+                            <i className="bi bi-youtube me-2"></i>Watch on YouTube
+                          </a>
+                        )}
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+              </div>
+            </>
+          )}
         </Container>
       </section>
 
