@@ -34,3 +34,16 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Image", name: "src", widget: "image" }
               - { label: "Alt Text", name: "alt", widget: "string" }
+
+      - name: "past-performances"
+        label: "Past Performances"
+        file: "public/data/past-performances.json"
+        fields:
+          - label: "Performances"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "YouTube Link", name: "youtube", widget: "string", required: false, hint: "Full YouTube URL (e.g. https://youtube.com/watch?v=...)" }
+              - { label: "Poster Image", name: "poster", widget: "image", required: false }
