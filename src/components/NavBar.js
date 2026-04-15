@@ -54,7 +54,7 @@ function NavBar() {
             <Nav.Link href="#hero" onClick={() => scrollToSection('hero')}>Home</Nav.Link>
             <Nav.Link href="#about" onClick={() => scrollToSection('about')}>About</Nav.Link>
             <Nav.Link href="#classes" onClick={() => scrollToSection('classes')}>Classes</Nav.Link>
-            <Nav.Link href="/gallery" onClick={(e) => { e.preventDefault(); closeNav(); navigate('/gallery'); }}>Gallery</Nav.Link>
+            <Nav.Link href="#gallery" onClick={() => scrollToSection('gallery')}>Gallery</Nav.Link>
             <Nav.Link href="#performances" onClick={() => scrollToSection('performances')}>Performances</Nav.Link>
             <Nav.Link href="#contact" onClick={() => scrollToSection('contact')}>Contact</Nav.Link>
           </Nav>
