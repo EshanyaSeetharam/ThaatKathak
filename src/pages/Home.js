@@ -278,7 +278,7 @@ function Home() {
             <p className="mb-2">Our classes run throughout the year with new batches starting every quarter. Contact us for the next enrollment dates.</p>
             <p className="mb-4" style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>
               <i className="bi bi-award gold-text me-2"></i>
-              We coach students for examinations and certification under <strong className="gold-text">Akhil Bharatiya Gandharva Mahavidyalaya Mandal</strong>.
+              We train students for examinations and certification under <strong className="gold-text">Akhil Bharatiya Gandharva Mahavidyalaya Mandal</strong>.
             </p>
             <Button className="btn-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
               JOIN OUR CLASSES
