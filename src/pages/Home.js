@@ -31,7 +31,7 @@ function Home() {
       id: 1,
       level: "Saturday Batch",
       title: "Kalpavrisha, Horamavu",
-      description: "Conducted by Smitha Srinivasan herself. Experience traditional Kathak training with our founder and artistic director.",
+      description: "Conducted by Smt. Smitha Srinivasan herself. Experience traditional Kathak training with our founder and artistic director.",
       schedule: "Saturday: 10 AM - 12 PM"
     },
     {
@@ -52,7 +52,7 @@ function Home() {
       id: 4,
       level: "Sunday Batch",
       title: "Triple S Components Pvt Ltd, Electronic City",
-      description: "Conducted by Smitha Srinivasan herself. Junior and senior batches available with our founder.",
+      description: "Conducted by Smt. Smitha Srinivasan herself. Junior and senior batches available with our founder.",
       schedule: "Sunday: 9 AM - 12 PM"
     }
   ];
@@ -112,7 +112,7 @@ function Home() {
 
   const founderData = {
     id: 1,
-    name: "Smitha Srinivasan",
+    name: "Smt. Smitha Srinivasan",
     role: "Founder & Artistic Director",
     bio: "Trained under Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999.",
     image: founderImage
@@ -133,14 +133,14 @@ function Home() {
             <Col lg={6} className="mb-4 mb-lg-0 text-center">
               <img
                 src={founderImage}
-                alt="Smitha Srinivasan - Founder"
+                alt="Smt. Smitha Srinivasan - Founder"
                 className="about-image about-founder-img"
               />
             </Col>
             <Col lg={6}>
               <h3 className="mb-3">Our Legacy</h3>
-              <p>Founded in 2018 by Smitha Srinivasan, Thaat Kathak Academy is dedicated to preserving and promoting the classical dance form of Kathak.</p>
-              <p>Smitha has been a devoted student of Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999, forming the foundation of the academy's teaching approach—discipline, devotion, and dynamic storytelling.</p>
+              <p>Founded in 2018 by Smt. Smitha Srinivasan, Thaat Kathak Academy is dedicated to preserving and promoting the classical dance form of Kathak.</p>
+              <p>Smt. Srinivasan has been a devoted student of Karnataka Kalashree Guru Nandini Mehta and Guru Murali Mohan since 1999, forming the foundation of the academy's teaching approach—discipline, devotion, and dynamic storytelling.</p>
               <p>At Thaat, students are introduced to the rich heritage of Kathak while developing their own artistic voice. The academy offers classes for all levels, focusing on technique, abhinaya (expression), and performance skills.</p>
               <p>The Thaat Ensemble, the academy's performing wing, showcases Kathak through acclaimed performances across India, praised for elegance, precision, and emotive power.</p>
             </Col>
@@ -159,7 +159,7 @@ function Home() {
                       src={performanceImage7} 
                       alt={founderData.name} 
                       className="rounded-circle mb-3"
-                      style={{ width: '180px', height: '180px', objectFit: 'cover', border: '3px solid #d4af37' }}
+                      style={{ width: '180px', height: '180px', objectFit: 'cover', border: '2px solid rgba(212, 175, 55, 0.5)' }}
                     />
                   </div>
                 )}
@@ -179,7 +179,7 @@ function Home() {
                     src={performanceImage5} 
                     alt="Banaswadi Team" 
                     className="rounded-circle mb-3"
-                    style={{ width: '180px', height: '180px', objectFit: 'cover', border: '3px solid #d4af37' }}
+                    style={{ width: '180px', height: '180px', objectFit: 'cover', border: '2px solid rgba(212, 175, 55, 0.5)' }}
                   />
                 </div>
                 <Card.Body>
@@ -202,14 +202,14 @@ function Home() {
                     src={performanceImage6} 
                     alt="Electronic City Team" 
                     className="rounded-circle mb-3"
-                    style={{ width: '180px', height: '180px', objectFit: 'cover', border: '3px solid #d4af37' }}
+                    style={{ width: '180px', height: '180px', objectFit: 'cover', border: '2px solid rgba(212, 175, 55, 0.5)' }}
                   />
                 </div>
                 <Card.Body>
                   <Card.Title className="gold-text">Electronic City Team</Card.Title>
                   <Card.Subtitle className="mb-3">Senior Students</Card.Subtitle>
                   <Card.Text>
-                    <strong>Jaya Srinivasan</strong>, <strong>Sayanthan Sengupta</strong>, <strong>Shohini Ghosh</strong>, <strong>Sumantra Chaudhury</strong>, <strong>Puvaneshwari</strong>, <strong>Garima Gola</strong>
+                    <strong>Jaya Srinivasan</strong>, <strong>Sayantan Sengupta</strong>, <strong>Shohini Ghosh</strong>, <strong>Sumantra Chaudhury</strong>, <strong>Puvaneshwari</strong>, <strong>Garima Gola</strong>
                     <br /><br />
                     Accomplished dancers from our Electronic City branch, showcasing excellence in classical Kathak.
                   </Card.Text>
