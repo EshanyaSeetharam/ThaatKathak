@@ -7,7 +7,8 @@ const VIDEO_SRC = process.env.PUBLIC_URL + '/intro-video.mp4';
 function VideoHero() {
   const popupVideoRef = useRef(null);
   const bgVideoRef = useRef(null);
-  const [showPopup, setShowPopup] = useState(true);
+  const hasPlayed = sessionStorage.getItem('videoPlayed');
+  const [showPopup, setShowPopup] = useState(!hasPlayed);
   const [popupFading, setPopupFading] = useState(false);
 
   // Auto-play popup video
@@ -22,6 +23,7 @@ function VideoHero() {
     const video = popupVideoRef.current;
     const handleEnd = () => {
       setPopupFading(true);
+      sessionStorage.setItem('videoPlayed', 'true');
       setTimeout(() => setShowPopup(false), 600);
     };
 
@@ -38,6 +40,7 @@ function VideoHero() {
 
   const closePopup = () => {
     setPopupFading(true);
+    sessionStorage.setItem('videoPlayed', 'true');
     setTimeout(() => setShowPopup(false), 600);
   };
 
