@@ -1,7 +1,7 @@
 // src/pages/Home.js
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card, Form, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import VideoHero from '../components/VideoHero';
 import founderImage from '../assets/images/founder.jpg';
 import performanceImage5 from '../assets/images/performance5.jpeg';
@@ -10,6 +10,22 @@ import performanceImage7 from '../assets/images/performance7.jpeg';
 
 function Home() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handle scroll-to from navbar navigation (coming from another page)
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      setTimeout(() => {
+        const section = document.getElementById(location.state.scrollTo);
+        if (section) {
+          window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
+        }
+      }, 100);
+      // Clear the state so it doesn't re-scroll on re-renders
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
   // Dynamic data from CMS
   const [upcomingShows, setUpcomingShows] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
