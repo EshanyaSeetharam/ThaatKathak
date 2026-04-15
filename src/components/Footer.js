@@ -2,16 +2,6 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function Footer() {
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80, // Adjust for navbar height
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <footer>
       <Container>
