@@ -281,6 +281,32 @@ body {
   box-shadow: none !important;
 }
 
+/* Form inputs */
+.custom-card .form-control,
+.custom-card .form-select {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: var(--text-light);
+  border-radius: 0;
+}
+
+.custom-card .form-control:focus,
+.custom-card .form-select:focus {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: var(--primary-gold);
+  color: var(--text-light);
+  box-shadow: none;
+}
+
+.custom-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.custom-card .form-select option {
+  background-color: #111;
+  color: var(--text-light);
+}
+
 /* Footer styling */
 footer {
   background-color: rgba(0, 0, 0, 0.95);
