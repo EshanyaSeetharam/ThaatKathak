@@ -68,6 +68,7 @@ function VideoHero() {
       <div className="video-overlay"></div>
       <Container className="hero-content text-center">
         <h1 className="display-3 fw-bold mb-3">THAAT <span className="gold-text">KATHAK</span> ACADEMY</h1>
+        <p className="hero-location mb-2">Bangalore, India</p>
         <p className="tagline"><span>GRACE</span> | <span>RHYTHM</span> | <span>EXPRESSION</span></p>
         <div className="mt-4">
           <Button onClick={scrollToClasses} className="btn-gold me-3">JOIN CLASSES</Button>
