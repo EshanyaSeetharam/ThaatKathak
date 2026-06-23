@@ -1,3 +1,12 @@
 {
-  "items": []
+  "items": [
+    {
+      "title": "Prayas",
+      "date": "July 18 and 19 2026",
+      "venue": "Bhaavrang Studio, Koramangala",
+      "time": "Senior batch: 9 am to 12 pm Intermediate: 3 pm to 6 pm",
+      "description": "Senior : Taal Dhamar\nIntermediate : Tarana ",
+      "poster": "/uploads/145357e1-a8b1-4d06-a40c-b3c1f60f3e86.jpeg"
+    }
+  ]
 }
