@@ -47,3 +47,18 @@ collections:
               - { label: "Description", name: "description", widget: "text" }
               - { label: "YouTube Link", name: "youtube", widget: "string", required: false, hint: "Full YouTube URL (e.g. https://youtube.com/watch?v=...)" }
               - { label: "Poster Image", name: "poster", widget: "image", required: false }
+
+      - name: "workshops"
+        label: "Upcoming Workshops"
+        file: "public/data/workshops.json"
+        fields:
+          - label: "Workshops"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "string", hint: "Format: Month Day Year (e.g. July 13 2025)" }
+              - { label: "Venue", name: "venue", widget: "string" }
+              - { label: "Time", name: "time", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Poster", name: "poster", widget: "image" }
