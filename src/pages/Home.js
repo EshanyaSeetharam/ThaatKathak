@@ -30,6 +30,7 @@ function Home() {
   const [upcomingShows, setUpcomingShows] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
   const [pastPerformances, setPastPerformances] = useState([]);
+  const [upcomingWorkshops, setUpcomingWorkshops] = useState([]);
 
   // Fetch shows, gallery, and past performances from CMS JSON files
   useEffect(() => {
@@ -52,6 +53,16 @@ function Home() {
       .then(r => r.json())
       .then(data => setPastPerformances((data.items || []).map((p, i) => ({ ...p, id: i + 1 }))))
       .catch(() => setPastPerformances([]));
+
+    fetch('/data/workshops.json')
+      .then(r => r.json())
+      .then(data => {
+        const sorted = (data.items || [])
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .map((w, i) => ({ ...w, id: i + 1 }));
+        setUpcomingWorkshops(sorted);
+      })
+      .catch(() => setUpcomingWorkshops([]));
   }, []);
 
   // Classes data
@@ -137,7 +148,7 @@ function Home() {
     return () => {
       handlers.forEach(({ row, handler }) => row.removeEventListener('scroll', handler));
     };
-  }, [upcomingShows, galleryImages, pastPerformances]);
+  }, [upcomingShows, galleryImages, pastPerformances, upcomingWorkshops]);
 
   const founderData = {
     id: 1,
@@ -384,6 +395,49 @@ function Home() {
               </div>
             </>
           )}
+        </Container>
+      </section>
+
+      {/* Upcoming Workshops Section */}
+      <section id="workshops" className="section">
+        <Container>
+          <h2 className="section-title text-center mb-5">Upcoming Workshops</h2>
+          {upcomingWorkshops.length > 0 ? (
+            <div className="mobile-scroll-wrapper">
+            <Row className="mobile-scroll-row">
+              {upcomingWorkshops.map(workshop => (
+                <Col lg={4} md={6} key={workshop.id} className="mb-4 mobile-scroll-item">
+                  <Card className="custom-card h-100">
+                    <img src={workshop.poster} alt={workshop.title} className="w-100" style={{ objectFit: 'cover' }} />
+                    <Card.Body>
+                      <div className="d-flex align-items-start mb-2">
+                        <div className="calendar-date text-center me-3" style={{ minWidth: '60px' }}>
+                          <div className="fs-5 fw-bold">{workshop.date.split(' ')[1]}</div>
+                          <div className="small">{workshop.date.split(' ')[0]}</div>
+                        </div>
+                        <div>
+                          <h5 className="mb-1">{workshop.title}</h5>
+                          <p className="mb-1 small">{workshop.venue}</p>
+                          <p className="mb-0 small">{workshop.time}</p>
+                        </div>
+                      </div>
+                      {workshop.description && (
+                        <Card.Text className="mt-2 small">{workshop.description}</Card.Text>
+                      )}
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+            </div>
+          ) : (
+            <p className="text-center" style={{ color: 'rgba(255,255,255,0.6)' }}>No upcoming workshops at this time. Check back soon!</p>
+          )}
+          <div className="text-center mt-4">
+            <Button className="btn-gold" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+              ENQUIRE ABOUT WORKSHOPS
+            </Button>
+          </div>
         </Container>
       </section>
 
